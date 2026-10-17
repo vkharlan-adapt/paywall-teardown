@@ -1,0 +1,46 @@
+name: Build skill zip
+
+# Publish a GitHub release (any tag, e.g. v1.1.0) and this attaches
+# paywall-teardown.zip to it. The stable download link for landing pages is:
+# https://github.com/vkharlan-adapt/paywall-teardown/releases/latest/download/paywall-teardown.zip
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Smoke-test the renderer
+        run: |
+          pip install pillow
+          python3 skills/paywall-teardown/scripts/render_report.py \
+            --data skills/paywall-teardown/scripts/example.json \
+            --image docs/example-paywall.png \
+            --out /tmp/check.png
+
+      - name: Zip the skill folder
+        run: |
+          mkdir -p dist
+          cd skills
+          zip -r ../dist/paywall-teardown.zip paywall-teardown -x "*/__pycache__/*" "*.DS_Store"
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/paywall-teardown.zip
+          generate_release_notes: true
+
+      - name: Keep zip as build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paywall-teardown
+          path: dist/paywall-teardown.zip
