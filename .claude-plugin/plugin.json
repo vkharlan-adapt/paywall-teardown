@@ -1,0 +1,13 @@
+{
+  "name": "paywall-teardown",
+  "version": "1.1.0",
+  "description": "Drop in a paywall screenshot, get a 100-point score, an annotated report card, and 5–8 ranked A/B test ideas with expected impact.",
+  "author": {
+    "name": "Adapty",
+    "url": "https://adapty.io"
+  },
+  "homepage": "https://adapty.io/flow-paywall-builder/",
+  "repository": "https://github.com/vkharlan-adapt/paywall-teardown",
+  "license": "MIT",
+  "keywords": ["paywall", "subscription", "mobile-apps", "conversion", "ab-testing", "monetization"]
+}

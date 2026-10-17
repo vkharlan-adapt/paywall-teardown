@@ -1,0 +1,19 @@
+{
+  "name": "adapty",
+  "owner": {
+    "name": "Adapty",
+    "url": "https://adapty.io"
+  },
+  "metadata": {
+    "description": "Claude skills from Adapty for subscription app growth teams."
+  },
+  "plugins": [
+    {
+      "name": "paywall-teardown",
+      "source": "./",
+      "description": "Paywall score, annotated report card, and ranked A/B test ideas from a single screenshot.",
+      "version": "1.1.0",
+      "category": "marketing"
+    }
+  ]
+}
